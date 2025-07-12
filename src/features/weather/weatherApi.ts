@@ -40,10 +40,7 @@ export const weatherApi = createApi({
       },
     }),
 
-    getWeatherByCoords: builder.query<
-      WeatherResponse,
-      { latitude: number; longitude: number; name: string }
-    >({
+    getWeatherByCoords: builder.query<WeatherResponse, CitySuggestion>({
       query: ({ latitude, longitude }) => ({
         url: `${WEATHER_API_URL}/forecast`,
         params: {
@@ -60,7 +57,7 @@ export const weatherApi = createApi({
         const hourly = response.hourly;
 
         return {
-          city: arg.name,
+          city: `${arg.name}, ${arg.country}`,
           temperature: current.temperature,
           windSpeed: current.windspeed,
           humidity: hourly.relative_humidity_2m[0],

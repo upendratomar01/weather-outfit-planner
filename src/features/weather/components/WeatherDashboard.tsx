@@ -48,8 +48,24 @@ export default function WeatherDashboard() {
   useEffect(() => {
     if (selectedCity && !history.some((c) => c.id === selectedCity.id)) {
       dispatch(addToHistory(selectedCity));
+      setSelectedCity(null); // Reset selected city after adding to history
     }
   }, [selectedCity, history, dispatch]);
+
+  const handleOnChange = (
+    _: React.SyntheticEvent,
+    value: string | CitySuggestion | null
+  ) => {
+    if (value) {
+      setSelectedCity(value as CitySuggestion);
+    }
+  };
+
+  const handleInputChange = (_: React.SyntheticEvent, value: string) => {
+    if (value) {
+      setInput(value);
+    }
+  };
 
   return (
     <>
@@ -57,8 +73,8 @@ export default function WeatherDashboard() {
         label="Search City"
         options={suggestions}
         loading={isFetchingSuggestions}
-        onInputChange={(_, value) => setInput(value)}
-        onChange={(_, value) => setSelectedCity(value as CitySuggestion)}
+        onInputChange={handleInputChange}
+        onChange={handleOnChange}
         getOptionLabel={(option) => {
           const op = option as CitySuggestion;
           return `${op.name}, ${op.country}`;
@@ -83,9 +99,7 @@ export default function WeatherDashboard() {
         </Alert>
       )}
 
-      {weatherData && selectedCity && (
-        <WeatherCard data={weatherData} city={selectedCity} />
-      )}
+      {weatherData && <WeatherCard data={weatherData} />}
 
       <SearchHistory history={history} onSelect={setSelectedCity} />
     </>

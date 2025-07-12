@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { GEO_API_URL, WEATHER_API_URL } from "../../constants/api";
-import { getWeatherCondition } from "./utils/weatherCondition";
 
 export interface WeatherResponse {
+  city: string;
   temperature: number;
   windSpeed: number;
   humidity: number;
-  WeatherCondition: string;
+  weatherCode: number;
 }
 
 export interface CitySuggestion {
@@ -53,14 +53,16 @@ export const weatherApi = createApi({
         },
       }),
 
-      transformResponse: (response: any): WeatherResponse => {
+      transformResponse: (response: any, _, arg): WeatherResponse => {
         const current = response.current_weather;
         const hourly = response.hourly;
+
         return {
+          city: arg.name,
           temperature: current.temperature,
           windSpeed: current.windspeed,
           humidity: hourly.relative_humidity_2m[0],
-          WeatherCondition: getWeatherCondition(current.weathercode),
+          weatherCode: current.weathercode,
         };
       },
     }),

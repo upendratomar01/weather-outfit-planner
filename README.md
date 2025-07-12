@@ -1,69 +1,67 @@
-# React + TypeScript + Vite
+# 🌦️ Weather-Based Outfit Recommender
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive React + TypeScript web app that helps users check the current weather of any city and recommends an outfit based on the conditions. It also remembers your last 5 searches and lets you switch between light and dark themes.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+### 🔍 City Search with Suggestions
+- Type any city name to fetch live suggestions (via Open-Meteo Geocoding API).
+- Suggestions are debounced for performance.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🌦️ Weather Forecast
+- Displays:
+  - Temperature (°C)
+  - Wind Speed (km/h)
+  - Humidity (%)
+  - Condition (with suggestion like umbrella, sunglasses, etc.)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🧠 Search History
+- Stores and displays the last 5 searched cities (in-memory).
+- Re-selecting a city from history re-fetches its weather.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### 🌗 Theme Switcher
+- Toggle between light and dark mode instantly.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### ⚙️ Technical Stack
+- **React + TypeScript + Vite**
+- **Redux Toolkit + RTK Query** for state and API
+- **Material UI (MUI)** for UI components
+- **Custom Hooks** like `useDebounce`
+- **Context API** for theme switching
+
+
+---
+
+## 🛠️ Getting Started
+
+### 1. **Clone the Repository**
+
+```bash
+git clone https://github.com/upendratomar01/weather-outfit-planner.git
+cd weather-outfit-app
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. **Install dependencies**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+### 3. **Setup Environment Variables**
+
+```bash
+VITE_GEO_API_URL=https://geocoding-api.open-meteo.com/v1
+VITE_WEATHER_API_URL=https://api.open-meteo.com/v1
+```
+No API key needed — Open-Meteo is free to use without authentication.
+
+### 4. **Start the App Locally**
+
+```bash
+npm run dev
+```
+
+This will open the app in your browser at http://localhost:5173
+

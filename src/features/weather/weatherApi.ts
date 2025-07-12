@@ -10,6 +10,7 @@ export interface WeatherResponse {
 }
 
 export interface CitySuggestion {
+  id: number | string;
   name: string;
   country: string;
   latitude: number;
@@ -29,6 +30,7 @@ export const weatherApi = createApi({
       transformResponse: (response: any): CitySuggestion[] => {
         return (
           response.results?.map((r: any) => ({
+            id: r.id,
             name: r.name,
             country: r.country,
             latitude: r.latitude,

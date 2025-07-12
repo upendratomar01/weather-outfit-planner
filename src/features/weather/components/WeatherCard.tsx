@@ -1,5 +1,5 @@
 import { Card, CardContent, Grid, Typography } from "@mui/material";
-import { type WeatherResponse } from "../weatherApi";
+import { type CitySuggestion, type WeatherResponse } from "../weatherApi";
 import {
   getWeatherCondition,
   getWeatherSuggestion,
@@ -8,19 +8,19 @@ import { WetherCardItem } from "./WeatherCardItem";
 
 type WeatherCardProps = {
   data: WeatherResponse;
-  city: string;
+  city: CitySuggestion;
 };
 
 export const WeatherCard = ({ data, city }: WeatherCardProps) => {
   const { weatherCode, humidity, temperature, windSpeed } = data;
-  const suggestion = getWeatherSuggestion(weatherCode);
-  const weatherCondition = getWeatherCondition(weatherCode);
+  const suggestion = getWeatherSuggestion(weatherCode); // Get suggestion based on weather code
+  const weatherCondition = getWeatherCondition(weatherCode); // Get weather condition based on weather code
 
   return (
     <Card sx={{ mt: 2 }}>
       <CardContent>
         <Typography variant="h6" mb={2}>
-          {city}
+          {city.name}, {city.country}
         </Typography>
 
         <Grid container spacing={2}>

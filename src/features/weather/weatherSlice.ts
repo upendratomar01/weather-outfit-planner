@@ -1,7 +1,8 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { CitySuggestion } from "./weatherApi";
 
 interface WeatherState {
-  history: string[];
+  history: CitySuggestion[];
 }
 
 const initialState: WeatherState = {
@@ -12,12 +13,13 @@ const weatherSlice = createSlice({
   name: "weather",
   initialState,
   reducers: {
-    addToHistory(state, action: PayloadAction<string>) {
+    addToHistory(state, action: PayloadAction<CitySuggestion>) {
       const city = action.payload;
-      state.history = [city, ...state.history.filter((c) => c !== city)].slice(
-        0,
-        5
-      );
+      // Add the city to the history, ensuring no duplicates and limiting to 5 items
+      state.history = [
+        city,
+        ...state.history.filter((c) => c.id !== city.id),
+      ].slice(0, 5);
     },
   },
 });

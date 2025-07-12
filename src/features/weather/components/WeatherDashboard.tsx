@@ -48,7 +48,6 @@ export default function WeatherDashboard() {
   useEffect(() => {
     if (selectedCity && !history.some((c) => c.id === selectedCity.id)) {
       dispatch(addToHistory(selectedCity));
-      setSelectedCity(null); // Reset selected city after adding to history
     }
   }, [selectedCity, history, dispatch]);
 

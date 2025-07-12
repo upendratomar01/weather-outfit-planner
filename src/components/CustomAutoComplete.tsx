@@ -39,6 +39,7 @@ function CustomAutoComplete<T>(props: CustomAutoCompleteProps<T>) {
   return (
     <Autocomplete
       freeSolo={freeSolo}
+      autoHighlight
       options={options}
       getOptionLabel={getOptionLabel}
       loading={loading}

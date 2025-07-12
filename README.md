@@ -1,4 +1,4 @@
-# 🌦️ Weather-Based Outfit Recommender
+# 🌦️ Weather-Based Outfit Planner
 
 A responsive React + TypeScript web app that helps users check the current weather of any city and recommends an outfit based on the conditions. It also remembers your last 5 searches and lets you switch between light and dark themes.
 
